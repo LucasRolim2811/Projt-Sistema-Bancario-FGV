@@ -5,5 +5,12 @@ deve retornar um dicionário vazio.
 Retorno: Um dicionário no formato {"numero_conta": {"cliente": "Nome", "saldo": 123.45}, ...}. 
 O saldo deve ser um float."""
 
+import csv
 
-FALAAAA RAFAAAA
+caminho = "contas.csv" 
+
+def ler_dicionario(dicionario):
+	with open (caminho, "r") as arquivo:
+		dicionario = csv.reader(arquivo, delimiter=",", encoding="utf-8")
+		for linha in dicionario:
+			print(linha)
