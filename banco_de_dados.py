@@ -30,9 +30,11 @@ def salvar_contas_para_csv(caminho_arquivo:str, contas:dict) -> None: #Precisa v
         contas (dict): Dicionário que o usuário quer inserir no banco de dados do arquivo csv
     """
     try:
-        with open(caminho_arquivo, "w", encoding='utf-8') as arquivo_csv:
-            acessar_csv = csv.writer(arquivo_csv)
-            escrever_csv = acessar_csv.writerow(contas)
+        with open(caminho_arquivo, "w", encoding="utf-8", newline="") as arquivo_csv:
+            colunas = ["nome", "idade"]
+            acessar_csv = csv.DictWriter(arquivo_csv, fieldnames=colunas)
+            acessar_csv.writeheader()
+            acessar_csv.writerow(contas)
     except FileNotFoundError:
         print(f"O arquivo {caminho_arquivo} dado pelo usuário não foi encontrado.")
     else:
@@ -42,6 +44,5 @@ def salvar_contas_para_csv(caminho_arquivo:str, contas:dict) -> None: #Precisa v
 # Driver code
 
 carregar_contas_de_csv("contas.csv")
-salvar_contas_para_csv("contas.csv", {"nome": "rafael", "idade":22, "hobbie": "basquete"})
-salvar_contas_para_csv("contas.csv", {"nome": "lucas", "idade":20})
+salvar_contas_para_csv("contas.csv", {"nome": "rafael", "idade":22})
 carregar_contas_de_csv("contas.csv")
