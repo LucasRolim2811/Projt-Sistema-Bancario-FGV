@@ -22,6 +22,8 @@ while not resposta == 3:
 	
 	elif resposta == 2:
 		print("#" * 40)
+		
+		
 		print("Modo de Cliente acessado!!\nEscolha uma operação:")
 		resposta_cliente = int(input("1 - Consultar meu saldo\n" \
 							   "2 - Realizar um depósito\n" \
@@ -36,3 +38,20 @@ while not resposta == 3:
 		sleep(1.5)
 		print("Obrigado e até a próxima")
 
+"""
+funções:
+criar_conta
+depositar
+sacar
+consultar_saldo
+somar_saldos_gerais
+identificar_cliente_mais_rico
+somar_saldos_em_lote
+subtrair_saldos_em_lote
+realizar_transferencia
+
+f
+
+
+
+"""
