@@ -22,7 +22,7 @@ def carregar_contas_de_csv(caminho_arquivo: str) -> dict: #Está funcionando bem
             print(lines)
     return
 
-def salvar_contas_para_csv(caminho_arquivo:str, contas:dict) -> None: #Precisa verificar se está salvando o arquivo no final
+def salvar_contas_para_csv(caminho_arquivo:str="contas.csv", contas:dict=dict()) -> None: #Precisa verificar se está salvando o arquivo no final
     """Insere um dicionário dado pelo usuário dentro do banco de dados do csv passado pelo mesmo
 
     Args:
@@ -31,7 +31,7 @@ def salvar_contas_para_csv(caminho_arquivo:str, contas:dict) -> None: #Precisa v
     """
     try:
         with open(caminho_arquivo, "w", encoding="utf-8", newline="") as arquivo_csv:
-            colunas = ["nome", "idade"]
+            colunas = ["nome_cliente", "saldo"]
             acessar_csv = csv.DictWriter(arquivo_csv, fieldnames=colunas)
             acessar_csv.writeheader()
             acessar_csv.writerow(contas)
@@ -44,5 +44,5 @@ def salvar_contas_para_csv(caminho_arquivo:str, contas:dict) -> None: #Precisa v
 # Driver code
 
 carregar_contas_de_csv("contas.csv")
-salvar_contas_para_csv("contas.csv", {"nome": "rafael", "idade":22})
+salvar_contas_para_csv("contas.csv", {"nome_cliente": "rafael", "saldo":2000})
 carregar_contas_de_csv("contas.csv")
