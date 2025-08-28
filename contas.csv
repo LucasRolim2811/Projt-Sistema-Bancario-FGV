@@ -1,2 +1,2 @@
-O arquivo contas.csv deve conter os dados das contas bancárias organizados em formato tabular, 
-com um cabeçalho indicando os campos.
+nome,saldo
+rafael,2000
