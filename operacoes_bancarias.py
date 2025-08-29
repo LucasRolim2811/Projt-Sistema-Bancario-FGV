@@ -17,7 +17,7 @@ Retorno: Uma tupla com o numero da nova conta criada e
 o dicionário completo dela (ex: (0001, {"cliente": "Joao", "saldo": 0.00}))."""
 
 def criar_conta(numero_conta: str, nome_cliente: str) -> tuple[int, dict]:
-<<<<<<< HEAD
+
     banco_de_dados.salvar_contas_para_csv(contas=(numero_conta, dict("nome_cliente", nome_cliente, "saldo", 0)))
 
 
@@ -113,8 +113,6 @@ def subtrair_saldos_em_lote(**kwargs) -> int:
 def realizar_transferencia():
     pass
 
-=======
     
-    banco_de_dados.salvar_contas_para_csv(contas=(numero_conta, dict("nome_cliente", nome_cliente, "saldo", 0)))
+"""banco_de_dados.salvar_contas_para_csv(contas=(numero_conta, dict("nome_cliente", nome_cliente, "saldo", 0)))"""
     
->>>>>>> 3415201be0c52e42a14d8e9d20b4d4c64e8000e1
