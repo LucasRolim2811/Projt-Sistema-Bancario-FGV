@@ -138,5 +138,3 @@ def realizar_transferencia(conta_origem: str, conta_destino: str, valor: float) 
         ou (False, "Saldo insuficiente").
     """
     pass
-
-sacar("0002", 1000)
