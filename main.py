@@ -15,9 +15,9 @@ while not resposta == 3:
 	print("=" * 50)
 	numero_conta = int(input("  Sistema Seguro - Acesso Restrito  \n  Login necessário para continuar:"))
 	contas = banco_de_dados.carregar_contas_de_csv("contas.csv")
-	conta = (input("  Sistema Seguro - Acesso Restrito  \n  Login necessário para continuar:"))
+	
 
-	if conta in contas:
+	if numero_conta in contas:
     		
 		print("Login válido")
 		
@@ -43,10 +43,10 @@ while not resposta == 3:
 				operacoes_bancarias.somar_saldos_em_lote(**kwargs)
 			
 			elif resposta_gerente == 4:
-				operacoes_bancarias.subtrair_saldos_em_lote()
+				operacoes_bancarias.subtrair_saldos_em_lote(**kwargs)
 			
 			elif resposta_gerente == 5:
-				
+				nome_cliente = str("Digite seu nome:")
 				operacoes_bancarias.criar_conta(numero_conta, nome_cliente)
 				
 			elif resposta_gerente == 6:
