@@ -37,7 +37,7 @@ def salvar_contas_para_csv(caminho_arquivo:str="contas.csv", contas:dict=dict())
         contas (dict): Dicionário que o usuário quer inserir no banco de dados do arquivo csv
     """
     try:
-        with open(caminho_arquivo, "a", encoding="utf-8", newline="") as arquivo_csv:
+        with open(caminho_arquivo, "w", encoding="utf-8", newline="") as arquivo_csv:
             colunas = ["numero_conta", "nome_cliente", "saldo"]
             acessar_csv = csv.DictWriter(arquivo_csv, fieldnames=colunas)
             if arquivo_csv.tell() == 0:
@@ -50,6 +50,3 @@ def salvar_contas_para_csv(caminho_arquivo:str="contas.csv", contas:dict=dict())
 
     else:
         print(f"Dicionário dicionado no banco de dados COM SUCESSO!!!")
-
-
-salvar_contas_para_csv(contas={"0001": {"nome_cliente":"rafael", "saldo": 1000}, "0002": {"nome_cliente":"lucas", "saldo": 10000},"0003": {"nome_cliente":"Débhora", "saldo": 2000}})

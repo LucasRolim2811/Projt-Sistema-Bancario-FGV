@@ -1,7 +1,8 @@
 import banco_de_dados
+#########################################################################################
 
 class Erro_No_Banco(Exception):
-    """Verifica se o numero da conta existe"""
+    """Relata que houve erro no sistema"""
 class Conta_Inexistente(Erro_No_Banco):
     """Numero da conta(numero_conta) não existe no banco de dados"""
 class Saldo_Insuficiente(Erro_No_Banco):
@@ -17,16 +18,13 @@ def criar_conta(numero_conta: str, nome_cliente: str) -> tuple[int, dict]:
     Returns:
         tuple[int, dict]: Retorna uma tupla com o numero da conta e um dicionário com o nome e saldo do cliente
     """
-    dicionarios = banco_de_dados.carregar_contas_de_csv()
-    if numero_conta in dicionarios.keys():
-        print("Esse código já existe!!")
-    elif numero_conta not in dicionarios.keys():
-        banco_de_dados.salvar_contas_para_csv(contas={"numero_conta": numero_conta,"nome_cliente": nome_cliente, "saldo": 0}) #Insere os dados no csv
-        return (numero_conta, {"nome_cliente": nome_cliente, "saldo": 0})
+    dicionario_do_banco = {numero_conta: {"nome_cliente": nome_cliente, "saldo": 0}}
+    banco_de_dados.salvar_contas_para_csv(contas=dicionario_do_banco)
+    return (numero_conta, {"nome_cliente": nome_cliente, "saldo": 0})
     
 
 def depositar(numero_conta: str, valor: float) -> tuple[bool, str]:
-    """ Deposita um uma valor dado no saldo da conta especificada
+    """ Deposita um valor dado no saldo da conta especificada
 
     Args:
         numero_conta (str): Código da conta que se deseja fazer o depósito
@@ -35,13 +33,23 @@ def depositar(numero_conta: str, valor: float) -> tuple[bool, str]:
     Returns:
         tuple[bool, str]: Retorna se foi possível fazer o depósito[True/False] e uma mensagem de feedback
     """
-    dicionarios = banco_de_dados.carregar_contas_de_csv()
-    if numero_conta in dicionarios.keys():
-        print("-" * 30)
-        print("Sua conta existe!!")
-        dicionarios[numero_conta]["saldo"] = banco_de_dados.salvar_contas_para_csv(valor)
-    elif numero_conta not in dicionarios.keys():
-        print("Tentativa de depósito falhou. Por favor, digitar uma conta válida")
+    dicionario_do_banco = banco_de_dados.carregar_contas_de_csv()
+    situacao_do_deposito = ()
+    if numero_conta in dicionario_do_banco:
+        if valor > 0:
+            dicionario_do_banco[numero_conta]["saldo"] += valor 
+            banco_de_dados.salvar_contas_para_csv(contas=dicionario_do_banco)
+            situacao_do_deposito = (True, "Depósito realizado com sucesso!")
+        else:
+            situacao_do_deposito = (False, "Adicionar um valor MAIOR QUE ZERO!")
+    else:
+        print("ERRO! Esta conta não existe no banco de dados.\n" \
+        "Adicione uma conta válida!")
+        situacao_do_deposito = (False, "Conta inexistente!")
+        return situacao_do_deposito
+
+    return situacao_do_deposito
+
 
 
 def sacar(numero_conta: str, valor: float) -> tuple[bool, str]:
@@ -54,18 +62,19 @@ def sacar(numero_conta: str, valor: float) -> tuple[bool, str]:
     Returns:
         tuple[bool, str]: Retorna se foi possível fazer o depósito[True/False] e uma mensagem de feedback
     """
-    dicionarios = banco_de_dados.carregar_contas_de_csv()
-    try:
-        saldo_disponivel = dicionarios[numero_conta]["saldo"]
-        saldo_disponivel = saldo_disponivel - valor
-        banco_de_dados.salvar_contas_para_csv(contas=dicionarios)
-
-        
-    except Conta_Inexistente:
-        print("Tal conta é inválida! Tente uma válida")
-    
+    dicionario_do_banco = banco_de_dados.carregar_contas_de_csv()
+    situacao_do_saque = ()
+    if numero_conta in dicionario_do_banco:
+        if valor > 0:
+            dicionario_do_banco[numero_conta]["saldo"] -= valor
+            banco_de_dados.salvar_contas_para_csv(contas=dicionario_do_banco)
+            situacao_do_saque = (True, "Valor sacado com sucesso")
+        else:
+            situacao_do_saque = (False, "Adicionar valor MAIOR que ZERO!")
+        return situacao_do_saque
     else:
-        print("deu bom")
+        print("Conta não encontrada no banco de dados!")
+        return situacao_do_saque
 
 def consultar_saldo(numero_conta: str) -> float | None:
     """Verifica o saldo da conta informada
@@ -130,3 +139,4 @@ def realizar_transferencia(conta_origem: str, conta_destino: str, valor: float) 
     """
     pass
 
+sacar("0002", 1000)
