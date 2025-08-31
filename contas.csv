@@ -1,2 +1,2 @@
-nome_cliente,saldo
-Rafael,0
+numero_conta,nome_cliente,saldo
+0001,Rafael,1000

@@ -108,5 +108,5 @@ while not resposta == 3:
 		break
 	else:
     		
-		print("Login inválido")
+		print("Erro: Conta inexistente.")
 		pass
