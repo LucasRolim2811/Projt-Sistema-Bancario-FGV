@@ -109,7 +109,9 @@ def sacar(numero_conta: str, valor: float) -> tuple[bool, str]:
     else:
         conta_no_padrao()[1]
 
+
 def consultar_saldo(numero_conta: str) -> float | None:
+    
     """Verifica o saldo da conta informada
 
     Args:
@@ -118,14 +120,12 @@ def consultar_saldo(numero_conta: str) -> float | None:
     Returns:
         float | None: Retorna o saldo(em float) se a conta existir ou None caso contrário
     """
-<<<<<<< HEAD
-def consultar_saldo(numero_conta: str) -> float | None:
     dicionario_do_banco = banco_de_dados.carregar_contas_de_csv()
-
+    saldo = dicionario_do_banco[numero_conta]["saldo"]
     if numero_conta in dicionario_do_banco:
-        return dicionario_do_banco[numero_conta]["saldo"]
+        return saldo
     else:
-        return "Nenhuma conta cadastrada"
+        return "Nenhuma conta cadastrada"    
 
 def somar_saldos_gerais(numero_conta : str) -> float:
     """Soma todos os saldos das contas informadas
@@ -139,58 +139,26 @@ def somar_saldos_gerais(numero_conta : str) -> float:
     for numero_conta in dicionario_do_banco:
         total += dicionario_do_banco[numero_conta]["saldo"]
     return total
-=======
-    pass
->>>>>>> 959b0b478707323192bcccf40498769db900dfd2
 
-def somar_saldos_gerais( ) -> float:
-    """Soma todos os saldos das contas informadas
-
-<<<<<<< HEAD
-def identificar_cliente_mais_rico( ) -> dict | None:
-    """Verifica qual cliente possui maior saldo na conta
-
-    Returns:
-        dict | None: Retorna todos os dados do cliente com maior saldo. None caso não haja contas no banco
-    """
-def identificar_cliente_mais_rico() -> dict | None:
-        dicionario_do_banco = banco_de_dados.carregar_contas_de_csv()
-=======
-    Returns:
-        float: Retorna a soma de todas as contas cadastradas
-    """
-    pass
->>>>>>> 959b0b478707323192bcccf40498769db900dfd2
 
 def identificar_cliente_mais_rico( ) -> dict | None:
-    """Verifica qual cliente possui maior saldo na conta
+    "Verifica qual cliente possui maior saldo na conta"
+    dicionario_do_banco = banco_de_dados.carregar_contas_de_csv()
+    lim_saldo = -1
+    cliente_mais_rico = 0
 
-<<<<<<< HEAD
-        maior_saldo = -1
-        cliente_mais_rico = None
-
-        for x in dicionario_do_banco.values():
-            if x["saldo"] > maior_saldo:
-                maior_saldo = x["saldo"]
+    for x in dicionario_do_banco.values():
+            if x["saldo"] > lim_saldo:
+                lim_saldo = x["saldo"]
                 cliente_mais_rico = x
 
-        return cliente_mais_rico
-=======
-    Returns:
-        dict | None: Retorna todos os dados do cliente com maior saldo. None caso não haja contas no banco
-    """
-    pass
->>>>>>> 959b0b478707323192bcccf40498769db900dfd2
+    return cliente_mais_rico
 
 
 def somar_saldos_em_lote(**kwargs) -> int:
     """Soma valores aos saldos de múltiplas contas de uma vez. As chaves dos kwargs serão os números das contas 
-    e os valores serão os montantes a serem adicionados.
+    e os valores serão os montantes a serem adicionados"""
 
-    Returns:
-        int: A quantidade de contas que foram atualizadas com sucesso. Contas inexistentes ou valores negativos 
-        serão ignorados.
-    """
     dicionario_do_banco = banco_de_dados.carregar_contas_de_csv()
     contas_adicionadas = 0
     for conta_no_banco in dicionario_do_banco:
@@ -242,7 +210,12 @@ def realizar_transferencia(conta_origem: str, conta_destino: str, valor: float) 
         tuple[bool, str]: Tupla (sucesso, mensagem). Ex: (True, "Transferência realizada com sucesso.") 
         ou (False, "Saldo insuficiente").
     """
-    pass
+    dicionario_do_banco = banco_de_dados.carregar_contas_de_csv()
+
+    # Se não existir nenhuma conta cadastrada
+    if not dicionario_do_banco:
+        return (False, "Nenhuma conta cadastrada.")
+    
 
 if __name__ == "__main__":
     doctest.testmod()

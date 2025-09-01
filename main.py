@@ -15,10 +15,15 @@ while not resposta == 3:
 	print("=" * 50)
 	caminho_arquivo: str = "contas.csv"
 	numero_conta = int(input("  Sistema Seguro - Acesso Restrito  \n  Login necessário para continuar:"))
+<<<<<<< HEAD
 	contas = banco_de_dados.carregar_contas_de_csv(numero_conta,caminho_arquivo)
 	
+=======
+	contas = banco_de_dados.carregar_contas_de_csv("contas.csv")
+	conta = (input("  Sistema Seguro - Acesso Restrito  \n  Login necessário para continuar:"))
+>>>>>>> 959b0b478707323192bcccf40498769db900dfd2
 
-	if numero_conta in contas:
+	if conta in contas:
     		
 		print("Login válido")
 		
@@ -44,11 +49,11 @@ while not resposta == 3:
 				operacoes_bancarias.somar_saldos_em_lote(**kwargs)
 			
 			elif resposta_gerente == 4:
-				operacoes_bancarias.subtrair_saldos_em_lote(**kwargs)
+				operacoes_bancarias.subtrair_saldos_em_lote()
 			
 			elif resposta_gerente == 5:
-				nome_cliente = str("Digite seu nome:")
-				operacoes_bancarias.criar_conta(numero_conta, nome_cliente)
+				
+				operacoes_bancarias.criar_conta()
 				
 			elif resposta_gerente == 6:
 				pass
@@ -109,23 +114,5 @@ while not resposta == 3:
 		break
 	else:
     		
-		print("Login inválido")
+		print("Erro: Conta inexistente.")
 		pass
-
-"""
-funções:
-criar_conta()
-depositar()
-sacar()
-consultar_saldo()
-somar_saldos_gerais()
-identificar_cliente_mais_rico()
-somar_saldos_em_lote()
-subtrair_saldos_em_lote()
-realizar_transferencia()
-
-
-
-
-
-"""
