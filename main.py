@@ -13,8 +13,9 @@ while not resposta == 3:
 	
 	
 	print("=" * 50)
+	caminho_arquivo: str = "contas.csv"
 	numero_conta = int(input("  Sistema Seguro - Acesso Restrito  \n  Login necessário para continuar:"))
-	contas = banco_de_dados.carregar_contas_de_csv("contas.csv")
+	contas = banco_de_dados.carregar_contas_de_csv(numero_conta,caminho_arquivo)
 	
 
 	if numero_conta in contas:
