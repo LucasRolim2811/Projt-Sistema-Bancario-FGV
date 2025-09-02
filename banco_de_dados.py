@@ -47,6 +47,3 @@ def salvar_contas_para_csv(caminho_arquivo:str="contas.csv", contas:dict=dict())
 
     except FileNotFoundError:
         print(f"O arquivo {caminho_arquivo} dado pelo usuário não foi encontrado.")
-
-    else:
-        print(f"Dicionário dicionado no banco de dados COM SUCESSO!!!")
