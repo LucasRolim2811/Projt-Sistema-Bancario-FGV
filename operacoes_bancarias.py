@@ -133,7 +133,9 @@ def sacar(numero_conta: str, valor: float) -> tuple[bool, str]:
     else:
         print(conta_no_padrao(numero_conta)[1])
 
+
 def consultar_saldo(numero_conta: str) -> float | None:
+    
     """Verifica o saldo da conta informada
 
     Args:
@@ -197,12 +199,8 @@ def identificar_cliente_mais_rico() -> dict | None:
 
 def somar_saldos_em_lote(**kwargs) -> int:
     """Soma valores aos saldos de múltiplas contas de uma vez. As chaves dos kwargs serão os números das contas 
-    e os valores serão os montantes a serem adicionados.
+    e os valores serão os montantes a serem adicionados"""
 
-    Returns:
-        int: A quantidade de contas que foram atualizadas com sucesso. Contas inexistentes ou valores negativos 
-        serão ignorados.
-    """
     dicionario_do_banco = banco_de_dados.carregar_contas_de_csv()
     contas_adicionadas = 0
     for numero_conta, valor_a_adicionar in  kwargs.items():
